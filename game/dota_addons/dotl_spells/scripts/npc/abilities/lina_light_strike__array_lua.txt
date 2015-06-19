@@ -1,0 +1,55 @@
+//=================================================================================================================
+// Ability: Lina Light Strike Array Lua
+//=================================================================================================================
+"lina_light_strike_array_lua"
+{
+	// General
+	//-------------------------------------------------------------------------------------------------------------
+	"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
+	"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"	
+	"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+	"FightRecapLevel"				"1"
+	
+	"AbilityCastRange"				"625"
+	"AbilityCastPoint"				"0.45 0.45 0.45 0.45"
+	"BaseClass"					"ability_lua"
+	"AbilityTextureName"				"lina_light_strike_array_lua"
+	"ScriptFile"					"lina_light_strike_array_lua"
+	
+	// Time		
+	//-------------------------------------------------------------------------------------------------------------
+	"AbilityCooldown"				"7.0 7.0 7.0 7.0"
+	"AbilityDuration"				"1.6 1.9 2.2 2.5"				
+
+	// Cost
+	//-------------------------------------------------------------------------------------------------------------
+	"AbilityManaCost"				"100 110 120 130"
+
+	// Special
+	//-------------------------------------------------------------------------------------------------------------
+	"AbilitySpecial"
+	{
+		"01"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"light_strike_array_aoe"	"225"
+		}
+		
+		"02"
+		{
+			"var_type"						"FIELD_FLOAT"
+			"light_strike_array_delay_time"	"0.5"
+		}
+					
+		"03"
+		{
+			"var_type"						"FIELD_FLOAT"
+			"light_strike_array_stun_duration"	"1.6 1.9 2.2 2.5"
+		}
+		"04"
+		{
+			"var_type"					"FIELD_INTEGER"
+			"light_strike_array_damage"	"120 160 200 240"
+		}
+	}
+}

@@ -1,0 +1,11 @@
+//=================================================================================================================
+// HERO: Nature's Prophet
+//=================================================================================================================
+"npc_dota_hero_furion_lua"
+{
+	"override_hero"				"npc_dota_hero_furion"			// Hero to override
+	"Ability1"					"furion_sprout_lua"				// Ability 1
+	"Ability2"					"furion_teleportation_lua"
+	"Ability3"					"furion_force_of_nature_lua"
+	"Ability4"					"furion_wrath_of_nature_lua"
+}

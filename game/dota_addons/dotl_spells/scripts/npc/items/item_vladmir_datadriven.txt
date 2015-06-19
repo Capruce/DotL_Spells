@@ -1,0 +1,12 @@
+"item_vladmir_datadriven_modifier"
+		{
+			"Passive"			"1"
+			"IsHidden"			"0"
+			
+			"Properties"
+			{
+				"MODIFIER_PROPERTY_MANA_REGEN_CONSTANT"			"%mana_regen_aura"
+			}
+		}
+	}
+}
