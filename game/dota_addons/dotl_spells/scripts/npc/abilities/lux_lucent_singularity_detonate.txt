@@ -1,3 +1,0 @@
-//Lux' Third Ability: Lucent Singularity, Sub Ability: Detonate
-// Author: Capruce
-//Requires lux_lucent_singularity to work correctly
