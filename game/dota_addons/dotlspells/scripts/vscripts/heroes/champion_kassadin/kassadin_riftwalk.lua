@@ -7,23 +7,28 @@ function kassadin_riftwalk:GetIntrinsicModifierName()
 	return "modifier_kassadin_riftwalk"
 end
 
+--------------------------------------------------------------------------------
+
+function kassadin_riftwalk:GetAOERadius()
+	return self:GetSpecialValueFor( "damage_radius" )
+end
+
+--------------------------------------------------------------------------------
 
 function kassadin_riftwalk:GetManaCost( level )
 	local base_mana_cost = self:GetSpecialValueFor("base_mana_cost")
 
-	if level >= 0 then
-		return base_mana_cost
-	else
-		if self:GetLevel() >= 1 then
-			local current_stacks = self.modifier:GetStackCount()
-			local stack_mana_multiplier = self:GetSpecialValueFor("stack_mana_multiplier")
+	if self.modifier ~= nil then
+		local current_stacks = self.modifier:GetStackCount()
+		local stack_mana_multiplier = self:GetSpecialValueFor("stack_mana_multiplier")
 
-			return base_mana_cost * math.pow(stack_mana_multiplier, current_stacks)
-		else
-			return base_mana_cost
-		end
+		return base_mana_cost * math.pow(stack_mana_multiplier, current_stacks)
+	else
+		return base_mana_cost
 	end
 end
+
+--------------------------------------------------------------------------------
 
 function kassadin_riftwalk:OnSpellStart()
 	if IsServer() then
@@ -79,13 +84,16 @@ function kassadin_riftwalk:OnSpellStart()
 		if current_stacks < max_stacks then
 			self.modifier:IncrementStackCount()
 		else
-			self.modifier:SetStackCount( modifier:GetStackCount() )
+			self.modifier:SetStackCount( self.modifier:GetStackCount() )
 			self.modifier:ForceRefresh()
 		end
 
 		self.modifier:SetDuration( stack_duration, true )
 		self.modifier:StartIntervalThink( stack_duration )
+
+		self:MarkAbilityButtonDirty()
 	end
 end
+
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------

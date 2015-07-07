@@ -2,7 +2,7 @@
 {
 	"override_hero"				"npc_dota_hero_antimage"					// Hero to override
 	"MovementTurnRate"			"10"										// Turning rate.
-	"VisionDaytimeRange"		"1200"										// Range of vision at day time
+	"VisionDaytimeRange"		"1800"										// Range of vision at day time
 	"VisionNighttimeRange"		"800"										// Range of vision at night time.
 	
 	// Abilities

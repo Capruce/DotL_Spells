@@ -34,11 +34,7 @@ end
 --------------------------------------------------------------------------------
 
 function OnProjectileHit( keys )
-	if keys.target == nil then
-		kv = {}
-		self.singularity_thinker = CreateModifierThinker( keys.caster, self, "modifier_lux_lucent_singularity_thinker", kv, self.target, keys.caster:GetTeamNumber(), false )
-		keys.ability:ApplyDataDrivenModifier( keys.caster, self.singularity_thinker, "modifier_lux_lucent_singularity_thinker", {} )
-	end
+	self.singularity_thinker = keys.ability:ApplyDataDrivenThinker(keys.caster, self.target, "modifier_lux_lucent_singularity_thinker", {})
 end
 
 --------------------------------------------------------------------------------

@@ -6,5 +6,5 @@
 	"npc_dota_hero_antimage" "1"
 	"npc_dota_hero_lion" "1"
 	"npc_dota_hero_windrunner" "1"
-	"npc_dota_hero_keeper_of_the_light" "0"
+	"npc_dota_hero_necrolyte" "1"
 }

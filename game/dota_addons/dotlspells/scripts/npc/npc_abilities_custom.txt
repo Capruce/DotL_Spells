@@ -1,6 +1,342 @@
 "DOTAAbilities"
 {
 	//=========================================================
+	// Karthus' Passive: Death Defied
+	// Author: Capruce
+	//=========================================================
+	"karthus_death_defied"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_HIDDEN"
+		"MaxLevel"						"1"
+		"FightRecapLevel"				"1"
+		"AbilityTextureName"			"karthus_death_defied"
+	
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"ghost_duration"		"7.0"
+			}
+		}
+	
+		"precache"
+		{
+			
+		}
+	
+		"OnOwnerSpawned"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"heroes/champion_karthus/karthus_death_defied.lua"
+				"Function"		"OnOwnerSpawned"
+			}
+		}
+	
+		"OnOwnerDied"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"heroes/champion_karthus/karthus_death_defied.lua"
+				"Function"		"OnOwnerDied"
+			}
+		}
+	
+		"Modifiers"
+		{
+			"modifier_karthus_death_defied"
+			{
+				"IsBuff"		"1"
+				"Passive"		"1"
+	
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_REINCARNATION"	"5"
+				}
+			}
+			
+			"modifier_karthus_death_defied_ghost_form"
+			{
+				"IsBuff"		"1"
+				"Duration"		"%ghost_duration"
+				"Attributes"	"MODIFIER_ATTRIBUTE_PERMANENT"
+	
+				"OnCreated"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"heroes/champion_karthus/karthus_death_defied.lua"
+						"Function"		"OnCreated"
+					}
+				}
+	
+				"OnDestroy"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"heroes/champion_karthus/karthus_death_defied.lua"
+						"Function"		"OnDestroy"
+					}
+				}
+	
+				"OnAbilityExecuted"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"heroes/champion_karthus/karthus_death_defied.lua"
+						"Function"		"OnAbilityExecuted"
+					}
+				}
+	
+				"States"
+				{
+					"MODIFIER_STATE_ROOTED"		"MODIFIER_STATE_VALUE_ENABLED"
+				}
+			}
+		}
+	}
+	//=========================================================
+	// Karthus' Third Ability: Defile
+	// Author: Capruce
+	//=========================================================
+	"karthus_defile"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_TOGGLE | DOTA_ABILITY_BEHAVIOR_AURA | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"	
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"MaxLevel"						"5"
+		"FightRecapLevel"				"1"
+		"AbilityTextureName"			"karthus_defile"
+		
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"310"
+	
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"0"
+	
+		/ Damage.
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityDamage"					"30 50 70 90 110"
+	
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"ap_scaling"			"0.20"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"mana_per_second"		"30 42 54 66 78"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"think_interval"		"1.0"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"damage_radius"			"310"
+			}
+			"05"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"mana_per_kill"			"20 27 34 41 48"
+			}
+		}
+	
+		"precache"
+		{
+			
+		}
+	
+		"OnToggleOn"
+		{
+			"RemoveModifier"
+			{
+				"ModifierName"		"modifier_karthus_defile_passive"
+				"Target"			"CASTER"
+			}
+	
+			"ApplyModifier"
+			{
+				"ModifierName"		"modifier_karthus_defile_aura"
+				"Target"			"CASTER"
+			}
+		}
+	
+		"OnToggleOff"
+		{
+			"RemoveModifier"
+			{
+				"ModifierName"		"modifier_karthus_defile_aura"
+				"Target"			"CASTER"
+			}
+	
+			"ApplyModifier"
+			{
+				"ModifierName"		"modifier_karthus_defile_passive"
+				"Target"			"CASTER"
+			}
+		}
+	
+		"Modifiers"
+		{
+			"modifier_karthus_defile_passive"
+			{
+				"IsHidden"	"1"
+				"Passive"	"1"
+	
+				"OnKill"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"heroes/champion_karthus/karthus_defile.lua"
+						"Function"		"OnKill"
+					}
+				}
+			}
+	
+			"modifier_karthus_defile_aura"
+			{
+				"IsHidden"			"1"
+				"ThinkInterval"		"%think_interval"
+	
+				"OnIntervalThink"
+				{
+					"RunScript"
+					{
+						"ScriptFile"	"heroes/champion_karthus/karthus_defile.lua"
+						"Function"		"OnIntervalThink"
+					}
+				}
+			}
+		}
+	}
+	//=========================================================
+	// Karthus' First Ability: Lay Waste
+	// Author: Capruce
+	//=========================================================
+	"karthus_lay_waste"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"	
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_NO"
+		"MaxLevel"						"5"
+		"FightRecapLevel"				"1"
+		"AbilityTextureName"			"karthus_lay_waste"
+		"AOERadius"						"%explosion_radius"
+		
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"650"
+		"AbilityCastPoint"				"0"
+	
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"1"
+	
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"20 26 32 38 44"
+	
+		/ Damage.
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityDamage"					"40 60 80 100 120"
+	
+		// Stats
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityModifierSupportValue"	"0.0"	// Primarily about the damage
+	
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"ap_scaling"			"0.30"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_FLOAT"
+				"explosion_delay"		"0.5"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"explosion_radius"		"200"
+			}
+			"04"
+			{
+				"var_type"					"FIELD_INTEGER"
+				"single_target_multiplier"	"2"
+			}
+		}
+	
+		"precache"
+		{
+			
+		}
+	
+		"OnSpellStart"
+		{
+			"RunScript"
+	        {
+	            "ScriptFile"    "heroes/champion_karthus/karthus_lay_waste.lua"
+	            "Function"  	"OnSpellStart"
+	        }
+		}
+	
+		"Modifiers"
+		{
+			"modifier_karthus_lay_waste_thinker"
+			{
+				"Duration"		"%explosion_delay"
+	
+				"OnCreated"
+				{
+					"RunScript"
+					{
+						"ScriptFile"    "heroes/champion_karthus/karthus_lay_waste.lua"
+		            	"Function"  	"OnCreated"
+					}
+				}
+	
+				"OnDestroy"
+				{
+					 "RunScript"
+					{
+						"ScriptFile"    "heroes/champion_karthus/karthus_lay_waste.lua"
+		            	"Function"  	"OnDestroy"
+					}
+				}
+			}
+		}
+	}
+	//=========================================================
 	// Kassadin's Third Ability: Force Pulse
 	// Author: Capruce
 	//=========================================================
@@ -462,7 +798,7 @@
 		"BaseClass"						"ability_lua"
 		"ScriptFile"					"heroes/champion_kassadin/kassadin_riftwalk.lua"
 		"AbilityUnitDamageType"			"DAMAGE_TYPE_MAGICAL"	
-		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_AOE | DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING | DOTA_ABILITY_BEHAVIOR_DONT_CANCEL_MOVEMENT"
 		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 		"AbilityType"					"DOTA_ABILITY_TYPE_ULTIMATE"
@@ -523,7 +859,7 @@
 			"06"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"damage_radius"		"150"
+				"damage_radius"			"150"
 			}
 			"07"
 			{

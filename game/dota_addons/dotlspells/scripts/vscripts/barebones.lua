@@ -444,8 +444,8 @@ end
 
 -- A player leveled up
 function GameMode:OnPlayerLevelUp(keys)
-	print ('[BAREBONES] OnPlayerLevelUp')
-	DeepPrintTable(keys)
+	--print ('[BAREBONES] OnPlayerLevelUp')
+	--DeepPrintTable(keys)
 
 	local player = EntIndexToHScript(keys.player)
 	local level = keys.level
