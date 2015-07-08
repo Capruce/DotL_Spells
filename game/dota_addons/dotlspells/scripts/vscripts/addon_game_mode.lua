@@ -7,6 +7,7 @@ require( 'libraries/timers' )
 require( 'libraries/physics' )
 require( 'libraries/projectiles' )
 require( 'barebones' )
+require( 'champions' )
 
 function Precache( context )
 	-- NOTE: IT IS RECOMMENDED TO USE A MINIMAL AMOUNT OF LUA PRECACHING, AND A MAXIMAL AMOUNT OF DATADRIVEN PRECACHING.

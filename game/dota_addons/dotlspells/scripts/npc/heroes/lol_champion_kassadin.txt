@@ -13,4 +13,26 @@
 	"Ability3"				"kassadin_nether_blade"					// Ability 2
 	"Ability4"				"kassadin_force_pulse"					// Ability 3
 	"Ability5"				"kassadin_riftwalk"						// Ultimate
+
+	// Attributes
+	//-------------------------------------------------------------------------------------------------------------
+	"AttributePrimary"			"DOTA_ATTRIBUTE_INTELLECT"
+	"AttributeBaseStrength"		"0"										// Base strength
+	"AttributeStrengthGain"		"0"										// Strength bonus per level.
+	"AttributeBaseIntelligence"	"0"										// Base intelligence
+	"AttributeIntelligenceGain"	"0"										// Intelligence bonus per level.
+	"AttributeBaseAgility"		"0"										// Base agility
+	"AttributeAgilityGain"		"0"										// Agility bonus per level.
+
+	// Base Stats
+	//-------------------------------------------------------------------------------------------------------------
+	"StatusHealth"				"564.04"								// Base health.
+	"HealthGain"				"78"
+	"StatusHealthRegen"			"7.79"									// Health regeneration rate.
+	"HealthRegenGain"			"0.5"
+	
+	"StatusMana"				"347.6"									// Base mana.
+	"ManaGain"					"70"
+	"StatusManaRegen"			"6"										// Mana regeneration rate.
+	"ManaRegenGain"				"0.8"
 }

@@ -1,7 +1,5 @@
 print ('[BAREBONES] barebones.lua' )
 
-LinkLuaModifier("modifier_ap", LUA_MODIFIER_MOTION_NONE)
-
 -- GameRules Variables
 ENABLE_HERO_RESPAWN = true              -- Should the heroes automatically respawn on a timer or stay dead until manually respawned
 UNIVERSAL_SHOP_MODE = false             -- Should the main shop contain Secret Shop items as well as regular items
@@ -270,20 +268,7 @@ function GameMode:OnHeroInGame(hero)
 	-- Store this hero handle in this table.
 	table.insert(self.vPlayers, hero)
 
-
-	--Apply the AP stat to the hero
-	hero:AddNewModifier(hero, nil, "modifier_ap", {})
-
-	function hero:GetAbilityPower()
-		return hero:GetModifierStackCount("modifier_ap", nil)
-	end
-
-	function hero:AddAbilityPower(amount)
-		hero:SetModifierStackCount("modifier_ap", hero, hero:GetAbilityPower() + amount)
-	end
-
-	--Passive is ability 1 (0-based) and so level it at the start of the game
-	hero:GetAbilityByIndex(0):SetLevel(1)
+	Champion:Create(hero)
 end
 
 --[[
@@ -448,7 +433,12 @@ function GameMode:OnPlayerLevelUp(keys)
 	--DeepPrintTable(keys)
 
 	local player = EntIndexToHScript(keys.player)
+	local hero = player:GetAssignedHero()
 	local level = keys.level
+
+	if IsChampion(hero) then
+		hero:OnLevelUp()
+	end
 end
 
 -- A player last hit a creep, a tower, or a hero
